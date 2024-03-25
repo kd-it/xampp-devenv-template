@@ -1,0 +1,16 @@
+services:
+  web:
+    build: env
+    volumes:
+      - ./public:/var/www/html:cached
+    ports:
+      - 8000:80
+  db:
+    image: mysql:8
+    volumes:
+      - data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+volumes:
+  data:
