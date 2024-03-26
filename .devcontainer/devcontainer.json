@@ -5,5 +5,13 @@
 	// "forwardPorts": [
 	// 	8000,
 	// 	8001
-	// ]
+	// ],
+	"remoteUser": "vscode",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker"
+			]
+		}
+	}
 }
