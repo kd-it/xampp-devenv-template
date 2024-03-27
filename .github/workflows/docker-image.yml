@@ -34,7 +34,7 @@ jobs:
         with:
           push: true
           # vscodeで"env.BRANCH_NAME"に赤波線がつくかもしれませんが、問題ありません
-          tags: densukest/xampp-devenv:${{ github.run_number }},densuke/xampp-devenv:${{ env.BRANCH_NAME }}
+          tags: densukest/xampp-devenv:${{ github.run_number }},densuke/xampp-devenv:${GITHUB_REF#refs/heads/release/}
           platforms: linux/amd64,linux/arm64
           context: env
       - name: Build and push
