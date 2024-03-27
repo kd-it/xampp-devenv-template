@@ -2,31 +2,41 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - release/v*
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - release/v*
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Buildx setting
-      uses: docker/setup-buildx-action@v3
-    - name: Login to Docker Hub
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    #- name: Build the Docker image
-    #  run: docker buildx build --tag densukest/xampp-devenv  --push env
-    - name: Build and push
-      uses: docker/build-push-action@v5
-      with:
-        push: true
-        tags: densukest/xampp-devenv:latest
-        platforms: linux/amd64,linux/arm64
-        context: env
+      - name: get branch name and set to env
+        id: branch
+        run: echo ::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/release/})
+      - uses: actions/checkout@v3
+      - name: Buildx setting
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build the Docker image
+        run: docker buildx build --tag densukest/xampp-devenv --push env
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: densukest/xampp-devenv:${{ github.run_number }},densuke/xampp-devenv:${{ steps.branch.outputs.BRANCH_NAME }}
+          platforms: linux/amd64,linux/arm64
+          context: env
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: densukest/xampp-devenv:latest
+          platforms: linux/amd64,linux/arm64
+          context: env
