@@ -4,13 +4,9 @@ on:
   push:
     branches-ignore:
       - release/*
-    paths:
-      - env/Dockerfile
   pull_request:
     branches-ignore:
       - release/*
-    paths:
-      - env/Dockerfile
   workflow_dispatch: # 手動実行
 
 jobs:
