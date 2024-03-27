@@ -1,10 +1,12 @@
 services:
   web:
-    build: env
+    image: densukest/xampp-devenv
+    # ローカルでビルドしたい場合は、imageをコメントアウトしてbuildを有効化してください
+    #build: env
     volumes:
       - ./public:/var/www/html:cached
     ports:
-      - 8000:80
+      - 127.0.0.1:8000:80
   db:
     image: mysql:8
     volumes:
