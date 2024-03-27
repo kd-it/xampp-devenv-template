@@ -14,17 +14,19 @@ on:
       - env/Dockerfile
   workflow_dispatch: # 手動実行
 
+env:
+  BRANCH_NAME: ${GITHUB_REF#refs/heads/release/}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: get branch name and set to env
-        id: branch
-        run: |
-          echo BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/release/}) >> "$GITHUB_ENV"
-          cat $GITHUB_ENV
+      # - name: get branch name and set to env
+      #   id: branch
+      #   run: |
+      #     echo BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/release/}) >> "$GITHUB_ENV"
+      #     cat $GITHUB_ENV
       - uses: actions/checkout@v3
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -42,7 +44,7 @@ jobs:
         with:
           push: true
           # vscodeで"env.BRANCH_NAME"に赤波線がつくかもしれませんが、問題ありません
-          tags: densukest/xampp-devenv:${{ github.run_number }},densuke/xampp-devenv:${GITHUB_REF#refs/heads/release/}
+          tags: densukest/xampp-devenv:${{ github.run_number }},densuke/xampp-devenv:${{env.BRANCH_NAME}}
           platforms: linux/amd64,linux/arm64
           context: env
       - name: Build and push
