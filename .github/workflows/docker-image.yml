@@ -4,10 +4,16 @@ on:
   push:
     branches:
       - release/v*
+    # コミット対象に env/Dockerfile が含まれているときのみ実行
+    paths:
+      - env/Dockerfile
   pull_request:
     branches:
       - release/v*
+    paths:
+      - env/Dockerfile
   workflow_dispatch: # 手動実行
+
 
 jobs:
   build:
