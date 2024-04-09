@@ -1,0 +1,27 @@
+services:
+  web:
+    image: densukest/xampp-devenv:v1
+    # ローカルでビルドしたい場合は、imageをコメントアウトしてbuildを有効化してください
+    # github上にコミットするときは、必ずbuildキーは無効化してください(mainにmergeする際にチェックしています)
+    #build: env
+    volumes:
+      - ./public:/var/www/html:cached
+      # テストの時はこれが必要
+      - ./:/workspace
+    ports:
+      - 80:80
+  db:
+    image: mysql:8
+    volumes:
+      - data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+  selenium-chrome:
+    image: seleniarm/standalone-chromium:114.0
+    ports:
+      - 4444:4444
+      - 5900:5900
+  
+volumes:
+  data:
