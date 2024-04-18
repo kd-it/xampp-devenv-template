@@ -6,8 +6,7 @@ ARG USER_GID=1000
 RUN apt-get update && apt-get install -y libzip-dev && docker-php-ext-install mysqli zip
 # Python3をインストール、一緒にpipとpipenvもインストール
 RUN apt-get install -y python3 python3-pip
-RUN ln -s /usr/bin/python3 /usr/bin/python; \
-    ln -s /usr/bin/pip3 /usr/bin/pip
+RUN ln -s /usr/bin/python3 /usr/bin/python
 # ユーザーを追加
 RUN groupadd -g $USER_GID $USER_NAME && \
     useradd -u $USER_UID -g $USER_GID -s /bin/bash -m $USER_NAME
