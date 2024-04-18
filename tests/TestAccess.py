@@ -20,10 +20,10 @@ class SampleTest(unittest.TestCase):
         time.sleep(2)
         self.driver.save_screenshot('screenshot.png')
 
-    def test_title(self):
+    def test_title_fail(self):
         self.driver.get('http://web/')
         time.sleep(2)
-        self.assertTrue('PHP' in self.driver.title)
+        self.assertTrue('PhP' in self.driver.title)
 
     def test_title_PHP(self):
         self.driver.get('http://web/')
