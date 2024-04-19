@@ -49,7 +49,22 @@
 				"DEVSENSE.phptools-vscode",
 				"MS-CEINTL.vscode-language-pack-ja",
 				"mhutchie.git-graph"
-			]
+			],
+			"settings": {
+				"files.exclude": {
+					"**/.git": true,
+					"**/.svn": true,
+					"**/.hg": true,
+					"**/CVS": true,
+					"**/.DS_Store": true,
+					"**/Thumbs.db": true,
+					"**/tests": true,
+					"**/.github": true,
+					"**/Pipfile*": true,
+					"**/Makefile*": true,
+					"**/.devcontainer": true,
+					"**/compose*.yml": true
+			}
 		}
 	}
 }
