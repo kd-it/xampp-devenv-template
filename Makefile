@@ -18,7 +18,7 @@ down:
 	make clean
 
 $(LOCKFILE):
-	docker compose -p test -f compose.yml -f compose_test.yml up --pull $(PULL) -d | tee $(LOCKFILE)
+	docker compose -p test -f compose.yml -f compose_test.yml up --pull $(PULL) --quiet-pull -d | tee $(LOCKFILE)
 	sleep 5
 
 clean:
