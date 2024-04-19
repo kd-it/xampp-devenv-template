@@ -1,6 +1,7 @@
 all: testall
 
 LOCKFILE=/tmp/up.run
+PULL=missing
 
 testall:
 	for i in tests/*.py; do \
@@ -17,7 +18,7 @@ down:
 	make clean
 
 $(LOCKFILE):
-	docker compose -p test -f compose.yml -f compose_test.yml up -d | tee $(LOCKFILE)
+	docker compose -p test -f compose.yml -f compose_test.yml up --pull $(PULL) -d | tee $(LOCKFILE)
 	sleep 5
 
 clean:
