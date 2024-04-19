@@ -36,10 +36,14 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-python.python",
 				"DEVSENSE.phptools-vscode",
 				"MS-CEINTL.vscode-language-pack-ja",
-				"mhutchie.git-graph"
+				"mhutchie.git-graph",
+				"saikou9901.evilinspector",
+				"oderwat.indent-rainbow",
+				"mechatroner.rainbow-csv",
+				"xdebug.php-debug"
+
 			],
 			"settings": {
 				"files.exclude": {
