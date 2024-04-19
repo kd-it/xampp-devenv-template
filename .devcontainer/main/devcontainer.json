@@ -3,6 +3,7 @@
 {
 	"name": "PHP実習環境",
 
+
 	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
 	"dockerComposeFile": [
@@ -46,7 +47,8 @@
 			"extensions": [
 				"ms-python.python",
 				"DEVSENSE.phptools-vscode",
-				"MS-CEINTL.vscode-language-pack-ja"
+				"MS-CEINTL.vscode-language-pack-ja",
+				"mhutchie.git-graph"
 			]
 		}
 	}
