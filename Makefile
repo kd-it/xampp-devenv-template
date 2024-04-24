@@ -20,6 +20,8 @@ down:
 $(LOCKFILE):
 	docker compose -p test -f compose.yml -f compose_test.yml up --pull $(PULL) --quiet-pull -d | tee $(LOCKFILE)
 	sleep 5
+	@echo "Waiting for db to be ready..."
+	sh -c "while ! docker exec --env-file=./env.txt $$(docker compose -p test ps -q db) /usr/local/bin/healthcheck.sh; do sleep 1; done"
 
 clean:
 	rm -f $(LOCKFILE)
