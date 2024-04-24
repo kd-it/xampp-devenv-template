@@ -26,3 +26,13 @@ services:
     # Overrides default command so things don't shut down after the process ends.
     # command: /bin/sh -c "while sleep 1000; do :; done"
 
+  db:
+    # 従来の設定を受け継ぎ
+
+# ボリューム db_data を定義、ファイルシステムはtmpfsを使う
+volumes:
+  db_data:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

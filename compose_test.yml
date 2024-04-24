@@ -14,3 +14,6 @@ services:
       - 4444 # Selenium grid server
       - 7900 # NoVNC server
     shm_size: 2gb
+
+  db:
+    tmpfs: /var/lib/mysql
