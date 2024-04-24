@@ -26,3 +26,15 @@ services:
     # Overrides default command so things don't shut down after the process ends.
     # command: /bin/sh -c "while sleep 1000; do :; done"
 
+  db:
+    # 従来の設定を受け継ぎ
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    env_file:
+      - ./env.txt
+      - ./env-pma.txt
+    ports:
+      - 80
