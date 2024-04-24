@@ -4,6 +4,7 @@ services:
     ports:
       - 80
     depends_on:
+      - db
       - selenium
     volumes:
       - ./:/workspaces
