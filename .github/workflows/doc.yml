@@ -14,7 +14,10 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+        # ソースをチェックアウトして、dbブランチに切り替える
         - uses: actions/checkout@v2
+          with:
+            ref: db
 
         - name: Set up Python
           uses: actions/setup-python@v2
