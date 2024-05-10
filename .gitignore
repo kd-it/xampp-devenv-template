@@ -4,3 +4,4 @@ screenshot.png
 storage/
 bootstrap/
 database/database.sqlite
+doc/build/
