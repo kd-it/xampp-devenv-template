@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>データベースの初期化タイミングと再初期化 &mdash; Webアプリケーション開発 学習用コンテナについて  ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c033477b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=4dbe4bdc"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="prev" title="エクスポート" href="export.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Webアプリケーション開発 学習用コンテナについて
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">データベースの利用</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="about.html">データベース付き開発環境について</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html">起動方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html">データベースの利用</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table-access.html">テーブルの作成について</a></li>
+<li class="toctree-l2"><a class="reference internal" href="export.html">エクスポート</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">データベースの初期化タイミングと再初期化</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">いつ初期化されるのか?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">初期構造・データを配置する手順</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">初期化の前に開発コンテナーから抜ける</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sql">初期化用のSQLファイルを配置する</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">開発コンテナーの破棄</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">開発コンテナーを再生成する</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Webアプリケーション開発 学習用コンテナについて</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">データベースの利用</a></li>
+      <li class="breadcrumb-item active">データベースの初期化タイミングと再初期化</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/db/init-with-sql.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>データベースの初期化タイミングと再初期化<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>本開発コンテナーでは、その環境を最初に構築した際にデータベースを作成します。
+一度作成すると、以降は開発コンテナーを破棄しない限りデータベースは残ります。
+そのため、一度終了(vscodeを閉じるなど)しても次の開発コンテナー起動時に再現されます。</p>
+<section id="id2">
+<h2>いつ初期化されるのか?<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>以下の状況ではデータベースの内容は初期化(消去)されてしまいます。</p>
+<ul class="simple">
+<li><p>Docker環境(Docker Desktop等)をアンインストールして、再度インストールした場合</p></li>
+<li><p>意図的に開発コンテナーおよび周辺環境を消去した場合</p>
+<ul>
+<li><p>周辺環境: データベース用の内部ストレージやコンテナ間ネットワーク等</p></li>
+</ul>
+</li>
+<li><p>意図的にボリュームを調べて破棄した場合</p>
+<ul>
+<li><p>破棄できるのは開発コンテナーが止まっているときのみです(稼働中は拒否されます)</p></li>
+</ul>
+</li>
+</ul>
+<p>例えばデータベース内のテーブル構造および初期データを準備しておくと、開発コンテナーを意図的に消去して作り直すことでデータベースはリセットできます。その際に初期化用のSQL文を用意することで、初回起動の際にデータベース内にテーブルや初期値をセットしておくことができます。
+このテクニックは、グループでの開発の際に、データベースの構造を揃える目的で使うこともできます。</p>
+<ol class="arabic simple">
+<li><p>メンバーの誰かが初期構造を作成する</p></li>
+<li><p>開発コンテナーを一度削除する</p></li>
+<li><p>設定用SQL文のファイルを調整し、メンバー間で共有する</p></li>
+<li><p>各メンバーが開発コンテナーを(再度)立ち上げる</p></li>
+</ol>
+<p>これで初期構造を揃えることができます。</p>
+</section>
+<section id="id3">
+<h2>初期構造・データを配置する手順<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3>初期化の前に開発コンテナーから抜ける<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>開発コンテナーから抜けて、ホスト側の処理に戻ってください。</p>
+<ol class="arabic simple">
+<li><p>コマンドパレットを開く</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Reopen</span> <span class="pre">folder</span> <span class="pre">locally</span></code> を選びます</p></li>
+</ol>
+<a class="reference internal image-reference" href="../_images/vscode-reopen-locally.png"><img alt="Reopen folder locally" class="align-center" src="../_images/vscode-reopen-locally.png" style="width: 50%;" /></a>
+<p>これで左下の「開発コンテナー…」の部分が通常の表示に戻ります。</p>
+</section>
+<section id="sql">
+<h3>初期化用のSQLファイルを配置する<a class="headerlink" href="#sql" title="Link to this heading"></a></h3>
+<p>用意した初期化用のSQLファイルを、<code class="docutils literal notranslate"><span class="pre">db</span></code>ディレクトリに配置してください。</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>もしSQLファイルに手を入れた場合、構文エラーや論理的なエラー(型に合わないデータを入れようとしたりする等)があるとコンテナーが初期化に失敗して起動しなくなります。</p>
+<p><code class="docutils literal notranslate"><span class="pre">db</span></code>ディレクトリから外して再度開発コンテナーを起動すれば動くと思いますが、できるだけエクスポートしたファイルをそのまま持ち込めるよう、エクスポート前に初期状態を確認してから行うようにしてください。</p>
+</div>
+<p>ここでは、<a class="reference internal" href="export.html#export"><span class="std std-ref">エクスポート</span></a>の際にダウンロードした<code class="docutils literal notranslate"><span class="pre">SAMPLE.sql</span></code>ファイルを配置しておきます。</p>
+<a class="reference internal image-reference" href="../_images/set-file.png"><img alt="`SAMPLE.sql`を`db`ディレクトリに配置" class="align-center" src="../_images/set-file.png" style="width: 50%;" /></a>
+</section>
+<section id="id5">
+<h3>開発コンテナーの破棄<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>開発コンテナーは終了してもシステムに残っています(次の起動に備えている)。
+これを破棄することで、データベース用のボリュームも破棄することができます。</p>
+<ol class="arabic simple">
+<li><p>vscode内でターミナルを開きます(<code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">New</span> <span class="pre">Terminal</span></code> もしくは「ターミナル」ビューにて「+」ボタンを押す)</p></li>
+<li><p>以下のコマンドを入力します(PowerShellのプロンプトを想定しています)</p></li>
+<li><p>破棄が完了します</p></li>
+</ol>
+<div class="highlight-pwsh notranslate"><div class="highlight"><pre><span></span><span class="n">PS</span><span class="p">&gt;</span> <span class="n">docker</span> <span class="n">compose</span> <span class="n">down</span> <span class="p">-</span><span class="n">-remove-orphans</span> <span class="n">-v</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/remove-devcontainers.png"><img alt="開発コンテナーの破棄" class="align-center" src="../_images/remove-devcontainers.png" style="width: 90%;" /></a>
+<p>この操作で、データベース用ストレージ(volume)も含めてすべて破棄されています。</p>
+</section>
+<section id="id6">
+<h3>開発コンテナーを再生成する<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>この状態で、再び開発コンテナーを再度作成してください。</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Rebuild</span> <span class="pre">and</span> <span class="pre">reopen</span> <span class="pre">in</span> <span class="pre">container</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PHP開発環境</span></code></p></li>
+</ol>
+<p>初期化から行われるため少し時間がかかります(イメージは存在しているはずなので初回ほどはかかりません)。
+この状態で新たに開かれたポートからphpMyAdminに接続すると、最初からエクスポートした内容が入っているはずです。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="export.html" class="btn btn-neutral float-left" title="エクスポート" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 佐藤 大輔.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

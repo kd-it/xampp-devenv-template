@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ja" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>テーブルの作成について &mdash; Webアプリケーション開発 学習用コンテナについて  ドキュメント</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c033477b"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=4dbe4bdc"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="検索" href="../search.html" />
+    <link rel="next" title="エクスポート" href="export.html" />
+    <link rel="prev" title="データベースの利用" href="access.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Webアプリケーション開発 学習用コンテナについて
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">データベースの利用</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="about.html">データベース付き開発環境について</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db.html">起動方法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="access.html">データベースの利用</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">テーブルの作成について</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gui">GUIによる方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sql">SQLによる方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="export.html">エクスポート</a></li>
+<li class="toctree-l2"><a class="reference internal" href="init-with-sql.html">データベースの初期化タイミングと再初期化</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Webアプリケーション開発 学習用コンテナについて</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">データベースの利用</a></li>
+      <li class="breadcrumb-item active">テーブルの作成について</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/db/table-access.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>テーブルの作成について<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>テーブルの作成は、phpMyAdminのGUIでもそれほど問題無く行えると思いますが、手動で行うと細かいところで間違えてしまうことがあります。</p>
+<section id="gui">
+<h2>GUIによる方法<a class="headerlink" href="#gui" title="Link to this heading"></a></h2>
+<p>データベース(今回は<code class="docutils literal notranslate"><span class="pre">SAMPLE</span></code>)選択すると、データベース一覧が確認できますが、初期状態ではなにもありません。</p>
+<a class="reference internal image-reference" href="../_images/select-sampledb.png"><img alt="DB選択後(初期状態は空)" class="align-center" src="../_images/select-sampledb.png" style="width: 80%;" /></a>
+<p>ここで必要であればテーブル名とカラム数を設定してテーブルを作成することができます。
+ここでは <code class="docutils literal notranslate"><span class="pre">hoge</span></code> テーブル、カラム数2で作成してみましょう。</p>
+<a class="reference internal image-reference" href="../_images/create-hoge-table.png"><img alt="テーブル作成(GUI)" class="align-center" src="../_images/create-hoge-table.png" style="width: 50%;" /></a>
+<p>カラム数2で設定しているので、それぞれのカラムの設定を入れます。指定外の部分は無記入のままでかまいません。</p>
+<ul class="simple">
+<li><p>第1カラム</p>
+<ul>
+<li><p>名前: <code class="docutils literal notranslate"><span class="pre">id</span></code></p></li>
+<li><p>タイプ: <code class="docutils literal notranslate"><span class="pre">INT</span></code></p></li>
+<li><p>A_I: チェックを入れる(Auto Increment: 値の自動挿入)</p></li>
+<li><p>インデックス: <code class="docutils literal notranslate"><span class="pre">PRIMARY</span></code> (A_Iのチェックを入れると自動で切り替わります)</p></li>
+</ul>
+</li>
+<li><p>第2カラム</p>
+<ul>
+<li><p>名前: <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
+<li><p>タイプ: <code class="docutils literal notranslate"><span class="pre">varchar</span></code></p></li>
+<li><p>長さ/値: 32</p></li>
+</ul>
+</li>
+</ul>
+<a class="reference internal image-reference" href="../_images/create-hoge-table-columns.png"><img alt="テーブル作成(GUI)" class="align-center" src="../_images/create-hoge-table-columns.png" style="width: 90%;" /></a>
+<p>これで「保存する」ボタンを押せばテーブルの作成が行われます。</p>
+<a class="reference internal image-reference" href="../_images/created-hoge-table.png"><img alt="テーブル作成後" class="align-center" src="../_images/created-hoge-table.png" style="width: 75%;" /></a>
+<p>あとは上部の<code class="docutils literal notranslate"><span class="pre">挿入</span></code>から値を入力できるので、実際に触って確かめてください。</p>
+</section>
+<section id="sql">
+<span id="accesssql"></span><h2>SQLによる方法<a class="headerlink" href="#sql" title="Link to this heading"></a></h2>
+<p>あらかじめSQLのテキストが配布されている場合は、こちらを使うことで同じ状況を再現できます。
+ここでは以下のテキストを利用しましょう。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create</span> <span class="n">table</span> <span class="n">person</span><span class="p">(</span><span class="n">uid</span> <span class="nb">int</span> <span class="n">auto_increment</span> <span class="n">primary</span> <span class="n">key</span><span class="p">,</span> <span class="n">name</span> <span class="n">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>  <span class="n">company_id</span> <span class="nb">int</span><span class="p">,</span> <span class="n">age</span> <span class="nb">int</span> <span class="p">);</span>
+<span class="c1"># テーブル person にデータを挿⼊</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">company_id</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="n">values</span> <span class="p">(</span><span class="s1">&#39;財津⼀郎&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">company_id</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;⽥宮⼆郎&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">);</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">company_id</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;北島三郎&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">company_id</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;伊藤四朗&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">35</span><span class="p">);</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">company_id</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;⽷居五郎&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">45</span><span class="p">);</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">person</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">company_id</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;鶴⽥六郎&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">55</span><span class="p">);</span>
+
+<span class="c1"># テーブル companies の作成</span>
+<span class="n">create</span> <span class="n">table</span> <span class="n">companies</span><span class="p">(</span><span class="n">cid</span> <span class="nb">int</span> <span class="n">auto_increment</span> <span class="n">primary</span> <span class="n">key</span><span class="p">,</span> <span class="n">name</span> <span class="n">char</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">address</span> <span class="n">char</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span> <span class="p">);</span>
+<span class="c1"># テーブル company にデータを挿⼊</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">companies</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;東京商事&#39;</span><span class="p">,</span> <span class="s1">&#39;東京都中央区中央1-1-1&#39;</span><span class="p">);</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">companies</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;⼤阪商会&#39;</span><span class="p">,</span> <span class="s1">&#39;⼤阪市北区中之島2-2-2&#39;</span><span class="p">);</span>
+<span class="n">insert</span> <span class="n">into</span> <span class="n">companies</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">address</span><span class="p">)</span> <span class="n">values</span><span class="p">(</span><span class="s1">&#39;神⼾⼯業&#39;</span><span class="p">,</span> <span class="s1">&#39;神⼾市中央区三宮町3-3-3&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>一度データベース名 <code class="docutils literal notranslate"><span class="pre">SAMPLE</span></code> を選択後、<code class="docutils literal notranslate"><span class="pre">SQL</span></code>を選択してください。</p>
+<a class="reference internal image-reference" href="../_images/gotosql.png"><img alt="SQLへの切り替え" class="align-center" src="../_images/gotosql.png" style="width: 75%;" /></a>
+<p>上記テキストをコピーし、SQL記述用のテキストエリアに貼り付け(ペースト)してください。
+貼り付け後実行することで、SQLに書かれた内容を評価して、テーブルと値の挿入が行われるはずです。</p>
+<a class="reference internal image-reference" href="../_images/paste-sql.png"><img alt="SQLへの切り替え" class="align-center" src="../_images/paste-sql.png" style="width: 75%;" /></a>
+<p>今回のSQL文では、<code class="docutils literal notranslate"><span class="pre">companies</span></code>と<code class="docutils literal notranslate"><span class="pre">people</span></code>テーブルが追加されます。
+それぞれのテーブルを確認すると、サンプルの値も挿入されていることも確認できます、操作してみましょう。</p>
+<a class="reference internal image-reference" href="../_images/sql-result.png"><img alt="SQL文処理後" class="align-center" src="../_images/sql-result.png" style="width: 90%;" /></a>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="access.html" class="btn btn-neutral float-left" title="データベースの利用" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="export.html" class="btn btn-neutral float-right" title="エクスポート" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 佐藤 大輔.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
