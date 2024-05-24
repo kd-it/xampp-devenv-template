@@ -41,7 +41,8 @@
 				"saikou9901.evilinspector",
 				"oderwat.indent-rainbow",
 				"mechatroner.rainbow-csv",
-				"xdebug.php-debug"
+				"xdebug.php-debug",
+				"EditorConfig.EditorConfig"
 			]
 		}
 	}
