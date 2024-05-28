@@ -6,7 +6,7 @@
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
 	"dockerComposeFile": [
 		"../../compose.yml",
-		"docker-compose.yml"
+		"compose.yml"
 	],
 	// The 'service' property is the name of the service for the container that VS Code should
 	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
@@ -21,6 +21,10 @@
 	// "features": {},
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
+	"forwardPorts": [
+		80,
+		"phpmyadmin:80"
+	],
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
 	// Uncomment the next line if you want to keep your containers running after VS Code shuts down.
@@ -40,8 +44,8 @@
 				"saikou9901.evilinspector",
 				"oderwat.indent-rainbow",
 				"mechatroner.rainbow-csv",
-				"xdebug.php-debug"
-
+				"xdebug.php-debug",
+				"EditorConfig.EditorConfig"
 			],
 			"settings": {
 				"files.exclude": {
