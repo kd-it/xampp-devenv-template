@@ -5,6 +5,12 @@
 
 # 使い方
 
+こちらのドキュメントを参照してください。
+
+* [アプリケーション開発 学習用コンテナについて](https://densuke.github.io/xampp-devenv-doc/index.html)
+
+ざっくりとした使い方は以下の通りです。
+
 1. このリポジトリをテンプレートとしてリポジトリを作り、教材開発用にcloneしてください
 2. `public` 以下の内容を書き換えてください。既存のデータは消してかまいません
 3. テストを作成してください、Pythonベースであればseleniumが利用可能になっています、テストは`tests`以下に作成してください
@@ -30,3 +36,18 @@ PHP実習環境のDevContainerでは、phpMyAdminが稼働しており、DB操�
 3. コンテナを見つけたら、 `+` マーク付きアイコンをクリックしてください(マウスカーソルをホバーさせると出ます) ![](/images/connect-with-new-window.png)
 4. vscodeの新規ウィンドウ(phpMyAdminコンテナ用)が起動するので、準備ができるまで少し待ちます
 5. phpMyAdminコンテナ用ウィンドウ側で、同様にポート転送のビューに切り替えると同様にポート転送が立ちますので、ブラウザを開いてください ![](/images/open-phpmyadmin-in-browser.png)
+
+# テストについて
+
+* テストを書くときは、DevContainerのテスト環境で起動してください
+* テストはtestsディレクトリ以下に置きましょう
+* Pythonのモジュールが足りない場合は、 `pipenv install` で必要なものを入れてください
+* `make test FILE=tests/XXXXXX.py` でテストを実行できます
+  * `make test_in_docker` とすると、`tests/*.py` をテストします
+
+コンテナ外でテストだけ走らせるときは、以下の操作でコンテナ群を起動してテストできます。
+
+* `make test_in_docker FILE=tests/XXXXXX.py`
+* `make testall_in_docker`
+
+テスト終了後は `make down` でコンテナ群を落としてください。
