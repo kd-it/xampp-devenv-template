@@ -14,7 +14,7 @@ test:
 up: $(LOCKFILE)
 
 down:
-	docker compose -p test down --rmi local
+	docker compose -p test down --rmi local --remove-orphans -v
 	make clean
 
 $(LOCKFILE):
@@ -22,6 +22,7 @@ $(LOCKFILE):
 	sleep 5
 	@echo "Waiting for db to be ready..."
 	sh -c "while ! docker exec --env-file=./env.txt $$(docker compose -p test ps -q db) /usr/local/bin/healthcheck.sh; do sleep 1; done"
+	@echo "コンテナの停止は必要に応じて実行してください(make down)"
 
 clean:
 	rm -f $(LOCKFILE)
@@ -29,11 +30,11 @@ clean:
 
 testall_in_docker: up
 	docker compose -p test exec -w /workspaces web make testall
-	make down
+	@[ -n "$(DOWN)" ] && make down
 
 test_in_docker: up
 	docker compose -p test exec -w /workspaces web make test FILE=$(FILE)
-	make down
+	@[ -n "$(DOWN)" ] && make down
 
 
 python-init:
