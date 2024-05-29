@@ -4,5 +4,5 @@
 ただし、初期化処理が行われるのは『データベース環境が最初にセットアップされるとき』のみです。
 それ以外は素通りしてしまいますので、注意してください。
 
-ファイルの詳細については、[Docker Hub上の記述](https://arc.net/l/quote/pkqkkitt)を参考にしてください。
+ファイルの詳細については、[Docker Hub上の記述](https://densuke.github.io/xampp-devenv-doc/guide/db-op.html)を参考にしてください。
 
