@@ -14,7 +14,7 @@ test:
 up: $(LOCKFILE)
 
 down:
-	docker compose -p test down --rmi local --remove-orphans -v
+	docker compose -p test down --rmi local --remove-orphans -v -t 1
 	make clean
 
 $(LOCKFILE):
