@@ -5,12 +5,8 @@ name = "pypi"
 
 [packages]
 selenium = "*"
-sphinx = "*"
-myst-parser = "*"
-sphinx-rtd-theme = "*"
-sphinx-autobuild = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.11"
+python_version = "3"
