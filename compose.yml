@@ -7,6 +7,7 @@ services:
     #build: env
     volumes:
       - ./public:/var/www/html:cached
+      - .:/app:cached
     env_file:
       - env.txt
 
