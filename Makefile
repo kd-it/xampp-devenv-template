@@ -38,12 +38,5 @@ test_in_docker: up
 
 
 python-init:
-	pipenv install
-
-doc: python-init
-	pipenv run make -C doc html
-
-doc-auto: python-init
-	pipenv run sphinx-autobuild -b html doc/source doc/build/html
-
+	pipenv install --dev
 
