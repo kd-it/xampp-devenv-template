@@ -14,7 +14,10 @@
     <p>
         このページは <?= $os ?> (<?= $arch ?>) で動作しています。
     </p>
-    <p>
-        <a href="test.php">test.php(DB接続テスト)</a>
+    <ul>
+        <li><a href="test.php">test.php(DB接続テスト)</a></li>
+        <li><a href="info.php">info.php(phpinfo)</a></li>
+    </ul>
+        
 </body>
 </html>
