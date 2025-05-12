@@ -8,9 +8,8 @@
 <body>
     <?php
     # unameでOS名とアーキテクチャ名を取得
-    $uname = posix_uname();
-    $os = $uname['sysname'];
-    $arch = $uname['machine'];
+    $os = php_uname('s');
+    $arch = php_uname('m');
     ?>
     <p>
         このページは <?= $os ?> (<?= $arch ?>) で動作しています。
