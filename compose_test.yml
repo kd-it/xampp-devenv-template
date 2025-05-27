@@ -17,4 +17,8 @@ services:
     shm_size: 2gb
 
   db:
-    tmpfs: /var/lib/mysql
+    volumes:
+      - type: tmpfs
+        target: /var/lib/mysql
+        tmpfs:
+          size: 256m
