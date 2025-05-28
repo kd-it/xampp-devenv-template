@@ -40,6 +40,8 @@ ENV LANG=ja_JP.UTF-8
 ENV LC_ALL=ja_JP.UTF-8
 
 # ツール類のインストール(git, python, locales)
+# Python 3.13より古いものがPython-minimalで入ると思いますが、プロジェクト側で3.13以上にしているので
+# あくまでuvが最低限のPythonを要求するための対応です。
 RUN <<EOT
     apt-get update && 
     apt-get install -y git unzip python3-minimal locales sudo &&
@@ -91,6 +93,7 @@ EOT
 
 # uvコマンド
 COPY --from=uv-source /usr/local/bin/uv /usr/local/bin/uvx /usr/local/bin/
+RUN uv toolchain install python 3.13
 
 USER ${USER_NAME}
 ENV HOME=/home/${USER_NAME}
