@@ -1,7 +1,7 @@
 [project]
 name = "xampp-devenv-template"
 version = "0.1.0"
-description = "Add your description here"
+description = "XAMPP環境もどきのものをDockerベースの開発コンテナで提供します"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = []
