@@ -5,11 +5,11 @@ PULL=missing
 
 testall:
 	for i in tests/*.py; do \
-	  python $$i; \
+	  uv run python $$i; \
 	done
 
 test:
-	python $(FILE)
+	uv run python $(FILE)
 
 up: $(LOCKFILE)
 
@@ -37,6 +37,4 @@ test_in_docker: up
 	@[ -n "$(DOWN)" ] && make down
 
 
-python-init:
-	pipenv install --dev
 
