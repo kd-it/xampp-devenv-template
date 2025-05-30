@@ -60,6 +60,7 @@
 					"**/Pipfile*": true,
 					"**/Makefile*": true,
 					"**/.devcontainer": true,
+					"**/.gemini": true,
 					"**/compose*.yml": true
 				}
 			}
