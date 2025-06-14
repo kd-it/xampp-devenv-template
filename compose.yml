@@ -1,6 +1,6 @@
 services:
   web:
-    image: ghcr.io/densuke-st/xampp-devenv:20250603075611
+    image: ghcr.io/densuke-st/xampp-devenv:20250614031607
     # build: build/
     # 2025/5/28以降 ビルド用のデータはこのリポジトリには含まれておりません
     #  -> https://github.com/densuke-st/xampp-devenv-image-docker
